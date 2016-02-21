@@ -1,0 +1,380 @@
+Algorithmes
+
+
+##############################################################################################################################################
+
+Créer une class instanciant le jeu une fois les joueurs arrivés dans la partie.
+_____________________________
+init_Game(dim:entier):objet
+_____________________________
+
+Donnée          : dim la dimension du plateau carré
+Variable Locale : game, l'objet contenant les tableaux du jeu
+Variable Locale : units, un tableau représentant l'emplacements des pions sur le plateau [x][y] ainsi que l'équipe à laquelle il appartient [0] et le groupe dans lequel il se trouve [1]
+Variable Locale : score, un tableau des scores des deux équipes respectives
+Variable Locale : groups, un tableau représentant un liste des groupes de pions présent dans le jeu
+Variable Locale : turn est un boolean indiquant si c'est au joueur 1 de jouer
+Résultat        : Objet contenant un tableau avec la position des pions (units) vide ainsi qu'un tableau contenant les groupes d'unités (groups)
+
+Début
+|   créer game
+|   |   créer units comme tableau à triple dimension comprenant dim lignes et dim colonnes et 2 de profondeur
+|   |   créer groups comme tableau à double dimension comprenant 0 ligne et 0 colonne
+|   |   score[1] ← 0
+|   |   score[2] ← 0
+|   |   turn ← vrai
+|   Fin créer
+|   retourner game
+Fin
+
+##############################################################################################################################################
+
+Fonction permettant de placer un pion sur le plateau.
+Suit la logique suivante :
+    Vérifie si l'emplacement demandé est vide
+        (Si oui alors on poursuit le programme)
+        Si non on renvoi Faux
+    Vérifie si un pion ennemis ne s'est pas déjà présent en tant que voisin
+        Si oui pour les 4 côtés adjacents alors on renvoi faux
+        Si oui alors on vérifie le groupe ennemis pour savoir s'ils sont encerclés
+            Si oui alors on retire les pions ennemis
+    Vérifie si un pion allié n'est pas déjà posé en tant que voisin
+        Si oui alors on ajoute le nouveau pion au groupe en question ainsi que sur le plateau
+        S'il y a plusieurs groupes alors on les fusionnent ensembles et on ajoute le nouveau pion à ce groupe ainsi que sur le plateau
+        Si non on créer un nouveau groupe et on ajoute le pion dans le nouveau groupe
+    Vérifie s'il est encore possible de poser un pion sur le plateau
+        Si non alors on clos le jeu
+            On Comptabilise les groupes les plus influents
+            On comptabilise les points totaux puis on annonce le gagnant
+        Si oui on bloque le tour du joueur et on débloque le tour de l'autre joueur
+_____________________________
+add_unit(x:entier,y:entier,t:entier, game:objet):objet
+_____________________________
+
+Donnée          : x ordonnée
+Donnée          : y abscisse
+Donnée          : t l'équipe dans laquelle se trouve le pion
+Donnée          : game, l'objet contenant les tableaux units et groups
+Résultat        : l'objet game contenant les tableaux actualisés selon les méchaniques du jeu de GO
+
+Début
+|   Si game→units[x][y][0] != Ø OU (game→turn = vrai && t = 2) OU (game→turn = faux && t = 1)
+|   |   retourner Faux
+|   Fin Si
+|   Si (game→units[x-1][y][0] != t ET game→units[x-1][y][0] != 0) ET (game→units[x+1][y][0] != t ET game→units[x+1][y][0] != 0) ET (game→units[x][y-1][0] != t ET game→units[x][y-1][0] != 0) ET (game→units[x][y+1][0] != t ET game→units[x][y+1][0] != 0) alors retourner faux
+|   Si game→units[x-1][y][0] != t
+|   |   game ← check_group(game→units[x-1][y][1], t, game)
+|   |   game ← check_group(game→units[x+1][y][1], t, game)
+|   |   game ← check_group(game→units[x][y-1][1], t, game)
+|   |   game ← check_group(game→units[x][y+1][1], t, game)
+|   Fin Si
+|   Si game→units[x-1][y][0] != 0 ET game→units[x+1][y][0] != 0 ETgame→units[x][y-1][0] != 0 ET game→units[x][y+1][0] != 0
+|   |   Si game→units[x-1][y][0] = t
+|   |   |   game→units[x][y][1] ← game→units[x-1][y][1]
+|   |   Si game→units[x-1][y][0] = t
+|   |   |   Si game→units[x][y][1] =! Ø
+|   |   |   |   Si game→units[x][y][1] < game→units[x+1][y][1]
+|   |   |   |   |   game ← fix_groups(game→units[x][y][1], game→units[x+1][y][1], game)
+|   |   |   |   Sinon game ← fix_groups(game→units[x+1][y][1], game→units[x][y][1], game)
+|   |   |   Sinon game→units[x][y][1] ← game→units[x+1][y][1]
+|   |   Si game→units[x-1][y][0] = t
+|   |   |   Si game→units[x][y][1] =! Ø
+|   |   |   |   Si game→units[x][y][1] < game→units[x][y-1][1]
+|   |   |   |   |   game ← fix_groups(game→units[x][y][1], game→units[x][y-1][1], game)
+|   |   |   |   Sinon game ← fix_groups(game→units[x][y-1][1], game→units[x][y][1], game)
+|   |   |   Sinon game→units[x][y][1] ← game→units[x][y-1][1]
+|   |   Si game→units[x-1][y][0] = t
+|   |   |   Si game→units[x][y][1] =! Ø
+|   |   |   |   Si game→units[x][y][1] < game→units[x][y+1][1]
+|   |   |   |   |   game ← fix_groups(game→units[x][y][1], game→units[x][y+1][1], game)
+|   |   |   |   Sinon game ← fix_groups(game→units[x][y+1][1], game→units[x][y][1], game)
+|   |   |   Sinon game→units[x][y][1] ← game→units[x][y+1][1]
+|   Sinon game→units[x][y][1] ← taille de (game→group)
+|   game→groups[game→units[x][y][1]][dernier element]→x ← x
+|   game→groups[game→units[x][y][1]][dernier element]→y ← y
+|   Si check_end(game) = vrai OU skip_turn(game) = vrai
+|   |   end_game(game)
+|   Sinon 
+|   |   Si game→turn alors game→turn ← false
+|   |   Sinongame→ turn ← vrai
+|   |   retourner game
+Fin
+
+##############################################################################################################################################
+
+Vérifie si le groupe est pris au piège
+Suit la logique suivante :
+    on parcours toutes les unités du groupes pour vérifier si elles ont toutes un voisin
+        Si toutes les unités ont leurs 4 voisins
+            on supprime toutes les unités du groupe
+            on vide le groupe
+            On ajoute les points à l'équipe adverse
+            on renvoi le jeu modifié
+        Sinon on renvoi game tel quel
+    
+_____________________________
+check_group(n:entier,t:entier,game:objet):objet
+_____________________________
+
+Donnée          : n est le numéro du groupe à vérifier
+Donnée          : t, le numéro de l'équipe du groupe testé
+Donnée          : game, l'objet contenant les tableaux units et groups
+Variable locale : i, un compteur
+Variable locale : g_x, x de l'unité consultée
+Variable locale : g_y, y de l'unité consultée
+Résultat        : l'objet game contenant les tableaux actualisés selon les méchaniques du jeu de GO
+
+Début
+|   i ← 0
+|   Tant que i < taille de (game→groups[n]) Faire
+|   |   i ← i + 1
+|   |   g_x ← game→groups[n][i]→x
+|   |   g_y ← game→groups[n][i]→y
+|   |   Si game→units[g_x-1][g_y][0] != Ø OU game→units[g_x+1][g_y][0] != Ø OU game→units[g_x][g_y-1][0] != Ø OU game→units[g_x][g_y+1][0] != Ø retourner game
+|   Fin Tant que
+|   i ← 0
+|   Tant que i < taille de (game→groups[n]) Faire
+|   |   i ← i + 1
+|   |   g_x ← game→groups[n][i]→x
+|   |   g_y ← game→groups[n][i]→y
+|   |   game→units[g_x][g_y][0] ← Ø
+|   |   game→units[g_x][g_y][1] ← Ø
+|   |   Si t = 1 alors game→score[2] ← game→score[2] + 1
+|   |   Sinon game→score[1] ← game→score[1] + 1
+|   Fin Tant que
+|   game→groups[n] ← Ø
+|   Retourner game
+Fin
+
+##############################################################################################################################################
+
+Fusionne deux groupes d'unités
+
+Suit la logique suivante :
+    Prend le deuxième groupe et ajoute toutes ses unités au premier groupe
+    Supprime le deuxième groupe
+    Renvoit game modifié
+_____________________________
+fix_groups(ta:entier, tb:entier, game:objet):objet
+_____________________________
+
+Donnée          : ta, numéro du premier groupe
+Donnée          : tb, numéro du deuxième groupe
+Donnée          : game, l'objet contenant les tableaux units et groups
+Variable locale : i, un compteur
+Résultat        : l'objet game contenant la fusion des deux groupes ainsi qu'un groupe vide
+
+Début
+|   i←0
+|   Tant que i < taille de (game→groups[tb]) Faire
+|   |   i ← i + 1
+|   |   game→groups[ta][en dernier] ← game→groups[tb][i]
+|   Fin Tant que
+|   game→groups[tb] ← Ø
+|   Retourner game
+Fin
+
+##############################################################################################################################################
+
+Vérifie si le joueur peux jouer
+
+Suit la logique suivante :
+    On copie le jeu
+    On remplace toutes les cases vides par des pions d'une équipe factice pour les former en groupes
+    On vérifie les voisins des groupes
+        Si les deux équipes sont voisines à l'un des groupes c'est que le joueur peut encore poser un pion
+        Sinon le joueur ne peut pas poser de pion
+    
+_____________________________
+skip_turn(game:objet):boolean
+_____________________________
+
+Donnée          : game, l'objet contenant les tableaux units et groups
+Variable locale : i, un compteur
+Variable locale : j, un compteur
+Variable locale : a, un boolean indiquant que l'équipe 1 est voisine à cette zone
+Variable locale : b, un boolean indiquant que l'équipe 2 est voisine à cette zone
+Variable locale : emag, un objet contenant la copie de game
+Variable locale : zones, un tableau contenant le numéro des groupes de zones vides
+Résultat        : un boolean indiquant si le jeu est finis ou non
+
+Début
+|   emag ← game
+|   i ← Ø
+|   a ← faux
+|   Tant que i < taille de (game→units) Faire
+|   |   i ← i + 1
+|   |   j ← Ø
+|   |   Tant que j < taille de (game→units[i]) Faire
+|   |   |   j ← j + 1
+|   |   |   Si game→units[i][j][0] = Ø
+|   |   |   |   emag ← add_unit(i,j,0,game)
+|   |   |   |   zone[à la fin] ← emag→units[i][j][1]
+|   |   |   Fin Si
+|   |   Fin Tant que
+|   Fin Tant que
+|   i ← Ø
+|   Tant que i < taille de (zone) Faire
+|   |   i ← i + 1
+|   |   j ← Ø
+|   |   Tant que j < taille de (game→groups[zone[i]])
+|   |   |   j ← j + 1
+|   |   |   Si game→units[game→groups[zone[i]][j]→x-1][game→groups[zone[i]][j]→y][0] = 1
+|   |   |   |   Si b = vrai renvoyer faux
+|   |   |   |   Sinon a ← vrai
+|   |   |   Si game→units[game→groups[zone[i]][j]→x-1][game→groups[zone[i]][j]→y][0] = 2
+|   |   |   |   Si a = vrai renvoyer faux
+|   |   |   |   Sinon b ← vrai
+|   |   |   Si game→units[game→groups[zone[i]][j]→x+1][game→groups[zone[i]][j]→y][0] = 1
+|   |   |   |   Si b = vrai renvoyer faux
+|   |   |   |   Sinon a ← vrai
+|   |   |   Si game→units[game→groups[zone[i]][j]→x+1][game→groups[zone[i]][j]→y][0] = 2
+|   |   |   |   Si a = vrai renvoyer faux
+|   |   |   |   Sinon b ← vrai
+|   |   |   Si game→units[game→groups[zone[i]][j]→x][game→groups[zone[i]][j]→y-1][0] = 1
+|   |   |   |   Si b = vrai renvoyer faux
+|   |   |   |   Sinon a ← vrai
+|   |   |   Si game→units[game→groups[zone[i]][j]→x][game→groups[zone[i]][j]→y-1][0] = 2
+|   |   |   |   Si a = vrai renvoyer faux
+|   |   |   |   Sinon b ← vrai
+|   |   |   Si game→units[game→groups[zone[i]][j]→x][game→groups[zone[i]][j]→y+1][0] = 1
+|   |   |   |   Si b = vrai renvoyer faux
+|   |   |   |   Sinon a ← vrai
+|   |   |   Si game→units[game→groups[zone[i]][j]→x][game→groups[zone[i]][j]→y+1][0] = 2
+|   |   |   |   Si a = vrai renvoyer faux
+|   |   |   |   Sinon b ← vrai
+|   |   |   Fin Si
+|   |   Fin Tant que
+|   Fin Tant que
+|   retourner vrai
+Fin
+
+##############################################################################################################################################
+
+Vérifie si toutes les cases du plateau sont occupées ou non
+
+Suit la logique suivante :
+    parcours le plateau
+        si une case vide est trouvée on renvoi faux
+        sinon on renvoi vrai
+_____________________________
+check_game(game:objet):boolean
+_____________________________
+
+Donnée          : game, l'objet contenant les tableaux units et groups
+Variable locale : i, un compteur
+Variable locale : j, un compteur
+Résultat        : un boolean indiquant si le jeu est finis ou non
+
+Début
+|   i ← Ø
+|   Tant que i < taille de (game→units) Faire
+|   |   i ← i + 1
+|   |   j ← Ø
+|   |   Tant que j < taille de (game→units[i]) Faire
+|   |   |   j ← j + 1
+|   |   |   Si game→units[i][j][0] = Ø retourner faux
+|   |   Fin Tant que
+|   Fin Tant que
+|   retourner vrai
+Fin
+
+##############################################################################################################################################
+
+Vérifie quel camp controle la zone vide spécifiée en fin de partie
+
+Suit la logique suivante :
+    On comptabilise le nombre de voisin en fonction de leur équipe
+    on attribue les points de ces cases à celui qui possède le plus de voisin d'une même équipe. (Ainsi si il y a 12 noirs autour de ces cases vides et 6 blancs, on attribuera la zone sous le contrôle des noirs)
+    On renvoit le jeu
+_____________________________
+check_zone(g:entier, game:objet):objet
+_____________________________
+
+Donnée          : g, numéro du groupe de la zone vide à traiter
+Donnée          : game, l'objet contenant les tableaux units et groups
+Variable locale : i, un compteur
+Variable locale : a, un compteur comptabilisant le nombre de voisin de l'équipe 1
+Variable locale : b, un compteur comptabilisant le nombre de voisin de l'équipe 2
+Résultat        : l'objet game contenant avec le score de l'une des deux équipes modifié
+
+Début
+|   i ← 0
+|   Tant que i < taille de (game→groups[g]) Faire
+|   |   i ← i + 1
+|   |   g_x ← game→groups[g][i]→x
+|   |   g_y ← game→groups[g][i]→y
+|   |   Si game→units[g_x-1][g_y][0] = 1
+|   |   |   a ← a+1
+|   |   Si game→units[g_x-1][g_y][0] = 2
+|   |   |   b ← b+1
+|   |   Si game→units[g_x+1][g_y][0] = 1
+|   |   |   a ← a+1
+|   |   Si game→units[g_x+1][g_y][0] = 2
+|   |   |   b ← b+1
+|   |   Si game→units[g_x][g_y-1][0] = 1
+|   |   |   a ← a+1
+|   |   Si game→units[g_x][g_y-1][0] = 2
+|   |   |   b ← b+1
+|   |   Si game→units[g_x][g_y+1][0] = 1
+|   |   |   a ← a+1
+|   |   Si game→units[g_x][g_y+1][0] = 2
+|   |   |   b ← b+1
+|   Fin Tant que
+|   Si a < b
+|   |   game→score[2] ← game→score[2] + i
+|   Sinon Si a > b
+|   |   game→score[1] ← game→score[1] + i
+|   Fin si
+|   game→groups[n] ← Ø
+|   Retourner game
+Fin
+
+##############################################################################################################################################
+
+Annoncer le gagnant de la partie
+Suit la logique suivante :
+    On vérifie s'il s'agit d'une victoire par abandon ou d'une fin de jeu
+        S'il s'agit d'un abandon (si le premier paramètre = 1 OU 2) alors le gagnant est systématiquement le joueur adverse
+        S'il ne s'agit pas d'un abandon mais d'un plateau plein (le premier paramètre = 0)
+            On créer des groupes pour les cases vides et on attribue les points de ces cases à celui qui possède le plus de voisin. Ainsi si il y a 12 noirs autour de ces cases vides et 6 blancs, on attribuera la zone sous le contrôle des noirs
+            On comptabilise les points totaux
+            on annonce le gagnant en retournant game
+_____________________________
+end_game(a:entier,game:objet):objet
+_____________________________
+
+Donnée          : a signifiant quel joueur à abandonné (si 0 alors il ne s'agit pas d'un abandon)
+Donnée          : result, l'objet contenant les informations liées aux résultats de la partie (Totaux des points par joueurs, N° du gagnant
+Variable locale : i, un compteur
+Variable locale : j, un compteur
+Variable locale : g_x, x de l'unité consultée
+Variable locale : g_y, y de l'unité consultée
+Variable locale : zones, un tableau contenant le numéro des groupes de zones vides
+Résultat        : l'objet game contenant les tableaux actualisés selon les méchaniques du jeu de GO
+
+Début
+|   Si a != 0
+|   |   game→score[a] ← 0
+|   |   retourner game
+|   Fin si
+|   i ← Ø
+|   Tant que i < taille de (game→units) Faire
+|   |   i ← i + 1
+|   |   j ← Ø
+|   |   Tant que j < taille de (game→units[i]) Faire
+|   |   |   j ← j + 1
+|   |   |   Si game→units[i][j][0] = Ø
+|   |   |   |   game ← add_unit(i,j,0,game)
+|   |   |   |   zone[à la fin] ← game→units[i][j][1]
+|   |   |   Fin Si
+|   |   Fin Tant que
+|   Fin Tant que
+|   i ← Ø
+|   Tant que i < taille de (zone) Faire
+|   |   game ← check_zone(zone[i], game)
+|   Fin Tant que
+|   Retourner game
+Fin
+
+##############################################################################################################################################

@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>GoWar | Game</title>
+    <link rel="stylesheet" href="src/css/reset.css">
+    <link rel="stylesheet" href="src/css/style_index.css">
+    <script src="js/connect.js"></script>
+</head>
+<body>
+   <div id="blackScreen"></div>
+    <div class="animFeatures close" id="animFeatures">
+        <div class="logoAnim">
+            <div class="partA"></div>
+            <div class="partB"></div>
+        </div>
+        <div class="part2Anim">
+            <div class="numAnim" id="numAnim">01</div>
+            <div class="titleAnim" id="titleAnim">Présentation du match making</div>
+        </div>
+    </div>
+	<div class="bg"></div>
+	<div class="header">	
+		<a href=""><div class="logo"></div></a>
+		<div class="user">
+			<div class="photouser" id="photouser"></div>
+			<div class="infouser">
+				<div class="nameuser" id="user_pseudo"></div>
+				<div class="statutuser">personnage connecté</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="gamebox">
+		<div class="wrapper">
+			<div class="game-header">
+				<div class="game-player">
+					<div class="game-playericon" id="playericonA"></div>
+					<div class="game-playerinfo" id="playerA"></div>
+					<div class="game-playernumber" id="scoreA">0</div>
+				</div>
+				<div class="timer">
+					<div id="clock_wrapper">
+                        <canvas id="clock" width="60" height="60"></canvas>
+                        <div id="timer"></div>
+                    </div>
+				</div>
+				<div class="game-opponent">
+					<div class="game-opponentnumber" id="scoreB">0</div>
+					<div class="game-opponentinfo" id="playerB"></div>
+					<div class="game-opponenticon" id="playericonB"></div>
+				</div>
+			</div>
+			<div id="game">
+				<ul id="plateau"></ul>
+			</div>
+			<div class="live"><div class="dot_live"></div>Live</div>
+			<div class="spectate_game">spectateurs</div>
+			<a href="#" class="abandon_game" onclick="forfeit()">Abandonner</a>
+			<a href="#" class="skip_turn" onclick="turn_passed()"><span class="arrow_skip"></span></a>
+		</div>
+	</div>
+
+	<div class="chat">
+		<div class="chatopponent">
+			<div class="photo-chatopponent" id="photo-chatopponent"></div>
+			<div class="info-chatopponent">
+				<div class="name-chatopponent" id="adversary"></div>
+				<div class="vignet"></div>
+				<div class="statut-chatopponent">En ligne</div>
+			</div>
+		</div>
+
+		<div class="chatmessages" id="chat"></div>
+		<div class="typezone">
+			<input type="text" id="entry" class="sendmessage" placeholder="Ecrire un message..." onKeyPress='if(event.keyCode == 13) bla();'>
+			<input type="submit" value="ENVOYER" class="sendbutton" onsubmit="bla()">
+		</div>
+	</div>
+   
+	<div id="container"></div>
+
+
+    <script src="/socket.io/socket.io.js"></script>
+    
+    
+
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src="js/game.js"></script>
+    <script src="js/socket.js"></script>
+    <script src="js/data.js"></script>
+    
+    <!-- JavaScript includes -->
+    <script src="http://code.jquery.com/jquery-1.6.3.min.js"></script>
+    <script src="src/js/jquery.shuffleLetters.js"></script>
+    <script src="src/js/index.js"></script>
+    
+    <script src="js/presentation.js"></script>
+    <script language="javascript">
+        document.onkeydown = applyKey;
+    </script>
+</body>
+</html>

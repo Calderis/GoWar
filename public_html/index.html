@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>GoWar | Connexion</title>
+    <link rel="stylesheet" href="src/css/reset.css">
+    <link rel="stylesheet" href="src/css/style_inscription.css">
+</head>
+<body>
+   <div class="animFeatures close" id="animFeatures">
+        <div class="logoAnim">
+            <div class="partA" id="partA"></div>
+            <div class="partB" id="partB"></div>
+        </div>
+        <div class="part2Anim" id="part2Anim">
+            <div class="numAnim" id="numAnim">01</div>
+            <div class="titleAnim" id="titleAnim">Présentation du match making</div>
+        </div>
+    </div>
+    <div class="animFeatures">
+        <div class="logoAnim"></div>
+        <div class="numAnim" id="numAnim">01</div>
+        <div class="titleAnim" id="titleAnim">Présentation du match making</div>
+    </div>
+	<div class="bg"></div>
+	<div class="ombre"></div>
+	<div class="menulogo">
+		<div class="logo">
+			<img src="src/img/logo.png" alt="logo" class="logo_img">
+		</div>
+	</div>
+	<div class="menuinscription">
+		<div class="switch">
+			<div class="dot1 dot dot_active">
+				
+			</div>
+			<div class="dot2 dot dot_inactive">
+				
+			</div>
+		</div>
+		<div class="inscription">
+			<div class="title_inscription">
+				Inscription
+			</div>
+			<form action="#">
+				<div class="labels" >Pseudo :</div>
+				<input type="text" name="pseudo" class="inputs" id="ins_pseudo">
+				<div class="labels">Mot de passe :</div>
+				<input type="password" name="password" class="inputs" id="ins_mdp">
+				<div class="labels">Confirmez votre mot de passe :</div>
+				<input type="password" name="password_confirm" class="inputs" id="ins_mdpB">
+				<br>
+				<input type="submit" class="sendinscription" value="Envoyer" onclick="register()">
+			</form>
+			<div class="alreadyregistered">Déjà inscrit ? Connectez-vous !</div>
+		</div>
+		<div class="connexion">
+			<div class="title_inscription">
+				Connexion
+			</div>
+			<form action="#">
+				<div class="labels" >Pseudo :</div>
+				<input type="text" name="pseudo" class="inputs" id="co_pseudo">
+				<div class="labels">Mot de passe :</div>
+				<input type="password" name="password" class="inputs" id="co_mdp">
+				<br>
+				<input type="checkbox" id="remember"><label for="remember" class="label_remember">Se souvenir de moi</label>
+				<input type="button" class="send" value="Envoyer" onclick="login()">
+			</form>
+			
+			<input type="button" class="invited_connexion" value="Jouer en tant qu'invité(e)" onclick="playAsGuest()">
+			<div class="notregistered">Pas encore inscrit ? Rejoignez la communauté !</div>
+		</div>
+	</div>	
+	<div class="menuright">
+		<div class="trapeze"></div>
+		<div class="switchright">
+			<div class="dot dotright dot_active dot_right1"></div>
+			<div class="dot dotright dot_inactive dotright_inactive dot_right2"></div>
+			<div class="dot dotright dot_inactive dotright_inactive dot_right3"></div>
+			<div class="dot dotright dot_inactive dotright_inactive dot_right4"></div>
+		</div>
+	</div>
+    <script src="src/js/script_inscription.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/connexion.js"></script>
+    
+    <script src="js/presentation.js"></script>
+    <script language="javascript">
+        document.onkeydown = applyKey;
+    </script>
+</body>
+</html>

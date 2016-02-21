@@ -1,0 +1,51 @@
+***** Intro *****
+Elements du jeu:
+- Pions (Pierre)
+- Plateau (Goban)
+- Points renforcés (Hoshi)
+- Groupe de pion (Chaîne) quand il n'y a qu'une liberté, la chaine est atari si 0 libertés alors la chaine est capturée
+- Possibilitée d'une chaine (libertés)
+- Score (points) le blanc gagne 7 points au début (Komi)
+- tour (turn)
+- on ne peut pas jouer sur une case venant d'être jouée
+- ou tu joues, ou tu passes
+
+Méchaniques du jeu
+- poser un pion
+    * l'emplacement est-il libre?
+    * s'ajoute t-il à une chaîne ?
+    * orchestre t-il la capture d'une chaine ennemie?
+- 
+
+
+***** Résumé *****
+Objets Principaux : 
+Pierre :
+    Il s'agit d'un objet représentant chaque pierre sur le jeu. On initialise alors son camp (team), son nombre de libertés (liberty).
+    Chaque pierre référencie deux choses : 
+        1) Ses voisins directes (nord - sud - est - west)
+        2) La chaine dans laquelle il se trouve
+            a) le premier de la chaine
+            b) la pierre se trouvant avant lui dans la chaine
+            c) la pierre se trouvant après lui dans la chaine
+
+Player :
+    Il s'agit du joueur lui même ainsi que des données qui lui son propre. son score (score), son équipe (team) et si c'est son tour (turn)
+
+Game
+    Il s'agit du jeu (plateau & contenu)
+        La liste de toutes les chaines (chain)
+        Plateau contenant la position des pions (goban)
+        Stock la chaine qui vient de se faire capturée et empêche la pose de pion jusqu'au prochain tour
+        Si l'un des joueurs à passé son tour (termine le jeu si deux jouers passent consécutivement)(havePassed)
+
+fonctions principales
+supp_chain : 
+    
+check_chain
+end_game
+    supp_it
+    is_with
+turn_passed
+add_unit
+play

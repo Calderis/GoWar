@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>GoWar | Home</title>
+    <link rel="stylesheet" href="src/css/reset.css">
+    <link rel="stylesheet" href="src/css/style_home.css">
+    <script src="js/connect.js"></script>
+</head>
+<body>
+    <div class="animFeatures close" id="animFeatures">
+        <div class="logoAnim">
+            <div class="partA" id="partA"></div>
+            <div class="partB" id="partB"></div>
+        </div>
+        <div class="part2Anim" id="part2Anim">
+            <div class="numAnim" id="numAnim">01</div>
+            <div class="titleAnim" id="titleAnim">Présentation du match making</div>
+        </div>
+    </div>
+	<div class="bg"></div>
+	<div class="header">	
+		<a href=""><div class="logo"></div></a>
+		<div id="systemConnection" onclick="LogOut()">
+            <a href="" class="hover-menu first-one">
+                <div class="inscription">
+                    <div class="iconinscription"></div>	
+                    <div class="infoinscription">s'inscrire</div>
+                </div>
+            </a>
+            <a href="" class="hover-menu second-one">
+                <div class="connexion">
+                    <div class="iconconnexion"></div>	
+                    <div class="infoconnexion">déconnexion</div>
+                </div>
+            </a>
+        </div>
+		<div class="user">
+			<div class="photouser" id="photouser"></div>
+			<div class="infouser">
+				<div class="nameuser" id="user_pseudo" onclick="showMe()"></div>
+				<div class="statutuser">personnage connecté</div>
+			</div>
+
+		</div>
+	</div>
+	
+
+	<div class="leftwrapper">
+		<div class="leftmenu">
+			<div class="arrowleft"></div>
+			<div class="arrowright"></div>
+
+			<div class="arrowback"></div>
+			<div class="return_profile">RETOUR</div>
+
+			<ul>
+				<li class="accueil firstli active ">ACCUEIL</li>
+				<li class="playIA" onclick="playIA()">JOUER CONTRE L'IA</li>
+				<li class="findopponent">CHERCHER UN ADVERSAIRE<span class="plus">+</span></li>
+				<li class="active profileview" id="profileview"></li>
+			</ul>
+						
+		</div>
+
+		<div class="info_profile_view">
+			<div class="player_profile_info">
+				<div class="photouser2 userconnected" id="photouser2"></div>
+				<div class="playedgames" id="playedgames"></div>
+				<div class="wongames" id="wongames"></div>
+				<div class="lostgames" id="lostgames"></div>
+				<div class="actionhover" id="actionProfil">
+					<div class="plus_startgame">+</div>
+					<div class="startgame">LANCER UNE PARTIE<span class="subinfo">Disponible pour jouer</span></div>
+				</div>
+			</div>
+
+			<div class="lastgames" id="lastgames"></div>
+			<div class="friends_profile">
+				<div class="entete_hisfriends">
+					<div class="user_icon"></div> <div class="number_friends_profile" id="numFriends">0 AMI</div>
+					<div class="add_as_friend" id="add_as_friend"></div>
+				</div>
+				<div class="all_friends" id="all_friends"></div>
+			</div>
+		</div>
+
+
+		<div class="leftcontent">
+			<div class="firstbg">
+				<div class="info">
+					<span class="infotitle">LAN PREVUE LE 28/08/2015  : PARTICIPATION GRATUITE</span>
+					Rassemblement de tout les fans du jeu de go, afin de participer à une soirée club.
+				</div>
+			</div>
+			<div class="fourads">
+				<div class="ad ad1">
+					REJOINDRE UN SALON
+					<div class="line"></div>	
+				</div>
+				<a href="#" class="ad adimg ad2" onclick="search_game(9)">
+					SALON 9X9
+					<span class="subtitle">+ JOUER</span>
+					<div class="linehover"></div>
+					<span class="infohover">NIVEAU DÉBUTANT</span>				
+				</a>
+				<a href="#" class="ad adimg ad3" onclick="search_game(13)">
+					SALON 13X13
+					<span class="subtitle">+ JOUER</span>	
+					<div class="linehover"></div>
+					<span class="infohover">NIVEAU INTERMEDIAIRE</span>		
+				</a>
+				<a href="#" class="ad adimg ad4" onclick="search_game(19)">
+					SALON 19X19
+					<span class="subtitle">+ JOUER</span>	
+					<div class="linehover"></div>	
+					<span class="infohover">NIVEAU EXPERT</span>	
+				</a>
+			</div>
+		</div>
+		<div class="connectedopponents"> 
+				<div class="logogroup"></div> 
+				ACTUELLEMENT CONNECTÉS : <span class="numberopponents" id="numberopponents"> 30 </span> NINJAS
+			</div>
+		<div class="opponents" id="opponents"></div>
+			
+
+	</div><!--
+--><div class="rightwrapper">
+		<div class="rightmenu">
+			<ul>
+				<li class="firstli active bestplayersmenu">MEILLEURS JOUEURS</li>
+				<li class="inactive friendsmenu">LISTE D'AMIS</li>
+				<li class="inactive results_searchmenu">RECHERCHE</li>
+			</ul>
+			<form class="form" name="form" onsubmit="newResearch(); return false" autocomplete="off">
+                <input class="searchbutton" type="submit" value=" ">
+                <input class="searchbar" id="searchbar" type="text" placeholder="RECHERCHE" dir="rtl" value="">
+            </form>
+		</div>
+
+		<div class="search_results">
+			<div class="search_title">
+				Joueurs correspondants à la recherche "<span class="typedsearch"></span>" :
+			</div>
+			<div class="search_match"  id="search">
+				<!--<div class="opponent">
+					<div class="photouser_opponent userconnected"></div>
+					<div class="username_opponent">Hisrohima Hamaru <div class="menudots"><div class="divdots"><div class="gamefriend"><div class="startgame_plus">+</div>Lancer une partie</div><div class="addfriend"><div class="addfriend_plus"></div>Ajouter un ami</div></div></div> <span class="subinfo_friend">Disponible pour jouer</span></div>
+				</div>-->
+			</div>
+		</div>
+		
+		<div class="players" id="players">
+		</div>
+
+		<div class="morescores">
+				<div class="moreplayers">+ DE SCORES</div>
+				<div class="arrowdown"></div>
+		</div>
+	
+		
+		
+			<div class="friendsconnected_title">
+				<div class="friendslogo"></div>
+				AMIS CONNECTÉS
+			</div>
+		<div class="friendsconnected" id="friendsconnected"></div>
+		
+			<div class="friendsconnected_title">
+				<div class="friendslogo"></div>
+				AMIS DÉCONNECTÉS
+			</div>
+		<div class="friendsconnected" id="friendsdisconnected"></div>
+	</div>	
+
+	<div class="popin">	</div>
+
+	<div class="chooseroom" id="chooseroom">
+		<div class="filterpop"></div>	
+		<div class="exit" id="exit()">x</div>
+
+		<div class="titlepop">CHOISISSEZ UN SALON POUR LE DUEL</div>
+		
+        <div onclick="defisSelect(9)">
+            <div class="upline">SALON 9x9</div>
+            <div class="line2"></div>
+            <div class="underline roomsize">NIVEAU DÉBUTANT</div>
+        </div>
+
+
+        <div onclick="defisSelect(13)">
+            <div class="mid_upline">SALON 13x13</div>
+            <div class="mid_line2"></div>
+            <div class="mid_underline roomsize">NIVEAU INTERMÉDIAIRE</div>
+        </div>
+		
+		
+        <div onclick="defisSelect(19)">
+            <div class="right_upline">SALON 19x19</div>
+            <div class="right_line2"></div>
+            <div class="right_underline roomsize">NIVEAU EXPERT</div>
+        </div>
+
+	</div>
+	
+	<div class="chooseroomB">
+		<div class="filterpop"></div>	
+		<div class="exit" id="exit()">x</div>
+
+		<div class="titlepop">JOUER CONTRE L'IA</div>
+		
+        <div onclick="iaSelect(9)">
+            <div class="upline">SALON 9x9</div>
+            <div class="line2"></div>
+            <div class="underline roomsize">NIVEAU DÉBUTANT</div>
+        </div>
+
+
+        <div onclick="iaSelect(13)">
+            <div class="mid_upline">SALON 13x13</div>
+            <div class="mid_line2"></div>
+            <div class="mid_underline roomsize">NIVEAU INTERMÉDIAIRE</div>
+        </div>
+		
+		
+        <div onclick="iaSelect(19)">
+            <div class="right_upline">SALON 19x19</div>
+            <div class="right_line2"></div>
+            <div class="right_underline roomsize">NIVEAU EXPERT</div>
+        </div>
+
+	</div>
+
+	<div class="pop_search_19x19">
+		<div class="filterpop"></div>	
+		
+		<div class="exit" onclick="leave_file(19)">x</div>
+
+		<div class="searchingpop">RECHERCHE D'UN ADVERSAIRE...</div>
+		<div class='loading loading1'></div>
+
+		<div class="line"></div>
+		<div class="roomsize">SALON 19x19</div>
+	</div>
+
+	<div class="pop_search_9x9">
+		<div class="filterpop"></div>	
+		
+		<div class="exit" onclick="leave_file(9)">x</div>
+
+		<div class="searchingpop">RECHERCHE D'UN ADVERSAIRE...</div>
+		<div class='loading loading2'></div>
+
+		<div class="line"></div>
+		<div class="roomsize">SALON 9x9</div>
+	</div>
+
+	<div class="pop_search_13x13">
+		<div class="filterpop"></div>	
+		
+		<div class="exit" onclick="leave_file(13)">x</div>
+
+		<div class="searchingpop">RECHERCHE D'UN ADVERSAIRE...</div>
+		<div class='loading loading3'></div>
+
+		<div class="line"></div>
+		<div class="roomsize">SALON 13x13</div>
+	</div>
+	<div class="pop_accept_match_9x9">
+		<div class="filterpop"></div>	
+		
+		<div class="exit">x</div>
+
+		<div class="defipop"><span id="adversary"></span> SOUHAITE VOUS AFFRONTER EN DUEL :</div>
+
+		<div class="choice">
+			<div class="accept" onclick="defis_yes()"><div class="accept_logo"></div>ACCEPTER</div>
+			<div class="refuse" onclick="defis_no()"><div class="refuse_logo"></div>REFUSER</div>
+		</div>
+
+		<div class="line_defi"></div>
+		<div class="roomsize_defi">SALON <span id="dim"></span></div>
+	</div>
+
+	<div class="pop_friend_occuped">
+		<div class="filterpop"></div>	
+		
+		<div class="exit">x</div>
+
+		<div class="occuped_text"><div class="occuped_cross"></div>VOTRE AMI EST OCCUPÉ</div>
+
+	</div>
+
+	<div class="pop_friend_poked">
+		<div class="filterpop"></div>	
+		
+		<div class="exit">x</div>
+
+		<div class="poke_text"><div class="poke_check"></div>VOTRE DEMANDE A ÉTÉ ENVOYÉE</div>
+
+	</div>
+	
+	<script src="src/js/jquery-2.1.4.min.js"></script>
+    <script src="src/js/spin.js"></script>
+    <script src="src/js/script_home.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/home.js"></script>
+    
+    <script src="js/presentation.js"></script>
+    <script language="javascript">
+        document.onkeydown = applyKey;
+    </script>
+</body>
+</html>

@@ -1,0 +1,459 @@
+html {
+	height: 100%;
+}
+
+body {
+	background: #000;
+	font-size: 25px;
+	color: #000;
+	font-family: "Myriad Pro";
+	width: 100%;
+	height: 100%;
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/****** ANIMATION PRESENTATION ******/
+.animFeatures.open{
+    margin-left:0px;
+    animation-name: NewAnim;
+    animation-duration: 1.5s;
+}
+.partA.open{
+    animation-name: LogoAnimA;
+    animation-duration: 1.5s;
+}
+.partB.open{
+    animation-name: LogoAnimB;
+    animation-duration: 1.5s;
+}
+.titleAnim.open{
+    animation-name: TxtAnim;
+    animation-duration: 1.5s;
+}
+
+.animFeatures.close{
+    animation-name: closeAnim;
+    animation-duration: 1.5s;
+}
+.animFeatures{
+    margin-left:-100%;
+    color:white;
+    height:160px;
+    background-image: url(../img/bgDegrade.png);
+    background-repeat: no-repeat;
+    background-position: left;
+    padding-left:30px;
+    position: fixed;
+    width:100%;
+    display: block;
+    bottom:0px;
+    z-index: 9999;
+}
+.logoAnim{
+    margin:20px;
+    position: absolute;
+}
+.partA{
+    height:57px;
+    width:57px;
+    display:inline-block;
+    background-image: url(../img/logoitm1.png);
+    position: absolute;
+    float:left;
+}
+.partB{
+    margin:12px 0 0 35px;
+    height:28px;
+    width:113px;
+    display:inline-block;
+    background-image: url(../img/logoitm2.png);
+}
+.part2Anim{
+    padding:80px 0 0 100px;
+}
+.numAnim{
+    font-size:0.4em;
+    width:100px;
+    padding-bottom:5px;
+    border-bottom:1px solid white;
+}
+.titleAnim{
+    text-transform: uppercase;
+    font-size:0.8em;
+    padding:10px 0 0 20px;
+}
+
+@keyframes NewAnim {
+    from {margin-left:-100%;}
+    to {margin-left:0px;}
+}
+@keyframes closeAnim {
+    from {margin-left:0px;}
+    to {margin-left:-100%;}
+}
+@keyframes LogoAnimA {
+    from {
+        -ms-transform: rotate(90deg); /* IE 9 */
+        -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+        transform: rotate(90deg);
+    }
+    to {
+        -ms-transform: rotate(0deg); /* IE 9 */
+        -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */
+        transform: rotate(0deg);
+    }
+}
+@keyframes LogoAnimB {
+    from {margin-left:5px;}
+    to {margin-left:35px;}
+}
+@keyframes TxtAnim {
+    from {padding-left:0px;}
+    to {padding-left:20px;}
+}
+
+/****** ANIMATION PRESENTATION ******/
+
+.bg{
+	background-image: url(../img/bg_connexion.jpg);
+	-webkit-background-size: cover;
+	background-size: cover;
+	background-position: center;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	opacity: 1;
+	z-index: 1
+}
+
+.ombre{
+	background-image: url(../img/ombre.png);
+	width: 100%;
+	height: 100%;
+	bottom: 0;
+	position: fixed;
+	background-repeat: no-repeat; 
+	background-attachment: fixed; 
+	background-size: cover; 
+	-moz-background-size: 100% 100%;     
+	-o-background-size: 100% 100%;       
+	-webkit-background-size: 100% 100%;  
+	background-size: 100% 100%;  
+	z-index: 19        
+}
+
+.menulogo{
+	margin-left: 30px;
+	height: 29%;
+	width: 450px;
+	background-color: #222222;
+	z-index: 20;
+	position: relative;
+}
+
+.logo{
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	padding-top: 8%;
+}
+
+
+
+.menuinscription{
+	margin-left: 30px;
+	height: 70%;
+	width: 450px;
+	background-color: #222222;
+	z-index: 20;
+	position: relative;
+	margin-top: 0.5%;
+}
+
+.switch{
+	z-index: 21;
+	width: auto;
+	height: 100px;
+	text-align: center;
+	padding-top: 60px;
+}
+
+.dot{
+	width: 10px;
+	height: 10px;
+	position: relative;
+	border-radius: 10px;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.dot2{
+	margin-left: 15px;
+}
+
+.dot_active{
+	background-color: #b53029;
+}
+.dot_inactive{
+	border: solid 1px #b53029;
+}
+
+.title_inscription{
+	color: #fec60f;
+	font-size: 22px;
+	letter-spacing:2px;
+	margin-left: 45px;
+	margin-top: 50px;
+	margin-bottom: 25px;
+	text-align: left;
+}
+
+form{
+	width: 100%;
+	text-align: center
+}
+
+.labels{
+	color: #e9e9e9;
+	font-size: 14px;
+	margin-bottom: 10px;
+	margin-top: 20px;
+	text-align: left;
+	margin-left: 20%;
+}
+
+
+.inputs{
+	background-color: #e9e9e9;
+	width: 60%;
+	border: none;
+	border-radius: 4px;
+	height: 25px;
+	color: #000;
+	outline: none;
+	padding-left: 2%
+}
+
+.invited{
+	margin-top: 30px;
+	display: inline-block;
+	width: 25%;
+	margin-right: 9%;
+	background-color: rgba(0,0,0,0);
+	border: 1.5px solid #b53029;
+	border-radius: 4px;
+	height: 30px;
+	color: #e9e9e9;
+	font-size: 14px;
+	outline: none;
+	transition: 0.15s;
+	cursor: pointer;
+}
+
+.invited_connexion{
+	margin-top: 20px;
+	display: inline-block;
+	width: 60%;
+	background-color: rgba(0,0,0,0);
+	border: 1.5px solid #b53029;
+	border-radius: 4px;
+	height: 30px;
+	color: #e9e9e9;
+	font-size: 14px;
+	outline: none;
+	transition: 0.15s;
+	cursor: pointer;
+	text-align: center;
+}
+
+.invited_connexion:hover{
+	background-color: #b53029;
+	transition: 0.15s;
+}
+
+
+.send{
+	margin-top: 30px;
+	display: inline-block;
+	width: 25%;
+	background-color: rgba(0,0,0,0);
+	border: 1.5px solid #fec60f;
+	border-radius: 4px;
+	height: 30px;	
+	color: #e9e9e9;
+	font-size: 14px;
+	outline: none;
+	transition: 0.15s;	
+	cursor: pointer;
+}
+.sendinscription{
+	margin-top: 30px;
+	display: inline-block;
+	width: 60%;
+	background-color: rgba(0,0,0,0);
+	border: 1.5px solid #fec60f;
+	border-radius: 4px;
+	height: 30px;	
+	color: #e9e9e9;
+	font-size: 14px;
+	outline: none;
+	transition: 0.15s;	
+	cursor: pointer;
+}
+
+.sendinscription:hover{
+	background-color: #fec60f;
+	transition: 0.15s;	
+}
+
+.inscription{
+	display: none;
+}
+.connexion{
+	display: block;
+	text-align: center;
+}
+
+.label_remember{
+	color: #e9e9e9;
+	font-size: 14px;
+	margin-left: 5px;
+	margin-right: 15px;
+}
+
+.invited:hover{
+	background-color: #b53029;
+	transition: 0.15s;
+}
+.send:hover{
+	background-color: #fec60f;
+	transition: 0.15s;			
+}
+
+.menuright{
+	position: fixed;
+	right: 0;
+	z-index: 100;
+	top: 35%;
+}
+
+.trapeze{
+	width: 0;
+	height: 250px;
+	border-right: 30px solid #222222;
+	border-top: 15px solid rgba(0,0,0,0);
+	border-bottom: 15px solid rgba(0,0,0,0);
+	position: relative;
+	z-index: 200;
+	margin-left:10px;	
+}
+
+.switchright{
+	position: absolute;
+	z-index: 300;
+	top:22%;
+	right: 0;
+}
+
+.dotright{
+	position: relative;
+	display: block;
+	margin-bottom: 35px;
+	margin-right: 7px;
+}
+
+.dotright_inactive{
+	background-color: #998551;
+	border : none;
+}
+
+.dotright_active{
+	background-color: #b53029;
+}
+
+.notregistered{
+	cursor: pointer;
+	color: #e9e9e9;
+	font-size: 14px;
+	margin-bottom: 10px;
+	margin-top: 20px;
+	text-align: center;
+	opacity: 0.5;
+	transition: 0.15s;
+}
+
+.notregistered:hover{
+	opacity: 1;
+	transition: 0.15s;
+}
+
+
+.alreadyregistered{
+	cursor: pointer;
+	color: #e9e9e9;
+	font-size: 14px;
+	margin-bottom:10px;
+	margin-top: 20px;
+	text-align: center;
+	opacity: 0.5;
+	transition: 0.15s;
+}
+
+.alreadyregistered:hover{
+	opacity: 1;
+	transition: 0.15s;
+}
+
+@media screen and (max-width:  1700px) {
+  .menulogo{
+  	width: 400px;
+  }
+  .menuinscription{
+	width: 400px;
+  }
+}
+
+@media screen and (max-width : 1600px) {
+	body{
+    zoom:95%;
+	}
+}
+
+@media screen and (max-width:  1400px) {
+  .menulogo{
+  	width: 350px;
+  }
+  .menuinscription{
+	width: 350px;
+  }
+  body{
+    zoom:85%;
+	}
+}
+
+@media screen and (max-width:  1000px) {
+  .menulogo{
+  	width: 300px;
+  }
+  .menuinscription{
+	width: 300px;
+  }
+}
+
+
+@media screen and (max-height:  800px) {
+	.title_inscription{
+		margin-top: 25px;
+	}
+}
+
+@media screen and (max-height:  700px) {
+	.title_inscription{
+		margin-top: 10px;
+	}
+}

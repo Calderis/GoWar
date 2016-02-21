@@ -1,0 +1,114 @@
+********** INSTALLATION **********
+1) Placer le dossier GoWar où bon vous semble
+conseil : Prenez un chemin suffisament simple pour pouvoir le retrouver à travers le terminal
+
+2) Réléchargez Node.js
+
+3) Ouvrez un terminal  à la racine du dossier GoWar
+
+4) faites la commande suivante : node server.js
+
+5) Ouvrez votre navigateur préféré (c'est à dire chrome) et allez à l'adresse suivante : http://localhost:4445
+
+6) Tout fonctionne
+
+
+Conseil : le jeu fonctionne avec un système de cookie permettant de connecter une personne à travers les pages. Si vous souhaitez tester le multijoueur, ouvrez deux navigateurs différents ou faites votre deuxième onglet dans une navigation privée.
+
+
+********** ÉQUIPE **********
+Cédrick LACHOT : Designer
+Nahel MOUSSI : Designer
+Antoine MONNIER : Développeur front
+Rémi Wetteren : Développeur back
+
+
+
+
+
+********** FEATURES **********
+||   Système de connexion   || A
+||     Système de défis     || B
+||       Match Making       || C
+||       Chat in-game       || D
+||            IA            || E
+||      Mode spectateur     || F
+||   Système de recherche   || G
+|| Historique revisionnable || H
+
+
+-------------- A -------------
+||   Système de connexion   ||
+
+Le système de connexion fonctionne avec le serveur node puisque ce dernier stock les comptes de chacun.
+
+Problème : A chaque chargement de page, le serveur associe un nouveau client.
+Solution : Un système de cookie prend la relève communiquant au serveur à chaque chargement de page l'identité du client
+
+Note : les comptes contiennent de nombreuses informations rendant son usage utile au dela de l'obtention d'un pseudo personnel
+Note : La possibilité de jouer en "guest" permet de rejoindre le site très rapidement, cependant le client ne possédant pas de mot de passe, il ne pourra pas retrouver ses informations s'il change de navigateur (mais les retrouvera grâce aux cookies sur son navigateur)
+
+-------------- B -------------
+||     Système de défis     ||
+
+Puisque chaque compte représente une personne physique (hormis l'IA), il est possible de lancer un défi pour affronter un ami, créant ainsi une partie privée
+
+Problème : Comment savoir si l'utilisateur adverse souhaite jouer ou non?
+Solution : un système de pop-up de confirmation amélioré
+
+Note : On retrouve la possibilité d'affronter les meilleurs joueurs directement depuis le tableau des meilleurs scores mais aussi on retrouve l'option sur le profil de chacun.
+
+-------------- C -------------
+||       Match Making       ||
+
+L'option match making apparait comme la plus naturelle concernant l'affrontement entre nos deux joueurs. Le principe est simple : deux personnes souhaitent jouer sur un même plateau, alors elles s'affrontent
+
+Problème : Un joueur élite peut affronter un nouveau joueur
+Solution : /
+
+-------------- D -------------
+||       Chat in-game       ||
+
+Fonctionnalité simple mais primordiale pour un jeu s'appuyant sur l'accord de deux joueurs pour finir une partie. Cela ajoute aussi une dimension "être ensemble".
+
+-------------- E -------------
+||            IA            ||
+
+Se basant sur un aspect d'immitation, l'IA est géré par le serveur qui parcours de manière intelligente un arbre de tous les schémas créés venant des autres parties. En cas de schéma inconnu, elle "improvise" en créant elle même son propre schéma. 
+
+Note : Plus il y a de parties jouées, plus l'ia sera intelligente
+
+-------------- F -------------
+||      Mode spectateur     ||
+
+Indispensable pour l'aspect compétition du jeu, le mode spectateur vient en renfort de l'affrontement multijoueur. Pour y accéder il suffit de faire "visionner la partie" sur quelqu'un déjà en jeu.
+
+Note : un spectateur ne pourra que regarder et ne pourra ni jouer ni utiliser le chat pour ne pas perturber le déroulement du jeu
+
+-------------- G -------------
+||   Système de recherche   ||
+
+Basé sur un algorithme similaire à celui de la recherche en arbre découvert dans le précédent projet de dictionnaire. L'algorithme a été modifié en conséquence mais permet de retrouver tous les joueurs sur GoWar.
+
+-------------- H -------------
+|| Historique revisionnable ||
+
+Les parties étant enregistrées, elle peuvent donc est revisionnée. Pose des pions et messages sont ainsi restitués pour revivre une partie ou pour revoir ses erreurs. Cette base de partie peut aussi constituer les parties historiques de chaque joueur. Si des tournois ou des joueurs de légendes venaient à utiliser notre application, les rediffusions seraient alors rediffusées largement.
+
+
+
+
+
+********** NOTE DE FIN **********
+GoWar a été une superbe occasion de travailler un projet très complet. Ce dernier a demandé beaucoup d'investissement personnel et de travail mais le résultat fournis est au delà de nos espérances. Nous sommes fier de ce que nous avons produit.
+Rien n'a été négligé afin d'offrir le jour de la présentation le produit le plus finis possible.
+
+Note : Toutes les ressources graphiques ont été fabriqués par nos soins tout comme le design unique qui a été développé.
+
+
+********** REMERCIEMENTS **********
+Merci à tout ceux qui ont assistés à notre présentation et de nous avoir félicité malgré le fait que le serveur ai crashé du à un trop grand nombre de connexion.
+
+Nous remercions également toutes les personnes qui nous ont soutenus à travers leurs encouragements et leurs félicitation tout au long du projet nous ayant permis de nous motiver pour produire un résultat très avancé
+
+Enfin merci à monsieur LEPOIVRE de nous avoir permis de faire un tel projet et d'avoir mis en place tout cet événement.
